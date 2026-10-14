@@ -1,0 +1,70 @@
+[gd_scene format=3 uid="uid://blxmwcs78oh5n"]
+
+[ext_resource type="PackedScene" uid="uid://cubyxkjna11q4" path="res://scenes/player.tscn" id="1_o5qli"]
+[ext_resource type="Texture2D" uid="uid://cpatu8w6nvn3x" path="res://assets/Sprite-0001-Sheet.png" id="2_0wfyh"]
+[ext_resource type="Script" uid="uid://otttnhwql7q2" path="res://scripts/mover_1.gd" id="3_sugp2"]
+[ext_resource type="Script" uid="uid://dhs1s8y5y04qu" path="res://scripts/mover_2.gd" id="4_jyhfs"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_sugp2"]
+texture = ExtResource("2_0wfyh")
+texture_region_size = Vector2i(32, 32)
+1:0/0 = 0
+1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="TileSet" id="TileSet_8seq6"]
+tile_size = Vector2i(32, 32)
+physics_layer_0/collision_layer = 1
+sources/0 = SubResource("TileSetAtlasSource_sugp2")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fdm2o"]
+size = Vector2(32, 559)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3c2fn"]
+size = Vector2(32, 559)
+
+[node name="Main" type="Node2D" unique_id=1035874174]
+
+[node name="Player" parent="." unique_id=1054140951 instance=ExtResource("1_o5qli")]
+position = Vector2(990, 479)
+collision_layer = 2
+collision_mask = 3
+
+[node name="Camera2D" type="Camera2D" parent="Player" unique_id=400299683]
+position = Vector2(3, -4)
+zoom = Vector2(2.01, 2.01)
+limit_top = 320
+limit_bottom = 640
+
+[node name="Chunk1" type="TileMap" parent="." unique_id=887288398]
+unique_name_in_owner = true
+tile_set = SubResource("TileSet_8seq6")
+format = 2
+layer_0/tile_data = PackedInt32Array(1245192, 65536, 0, 1245193, 65536, 0, 1245194, 65536, 0, 1245195, 65536, 0, 1245196, 65536, 0, 1245197, 65536, 0, 1245198, 65536, 0, 1245199, 65536, 0, 1245200, 65536, 0, 1245201, 65536, 0, 1245202, 65536, 0, 1245203, 65536, 0, 1245204, 65536, 0, 1245205, 65536, 0, 1245206, 65536, 0, 1245207, 65536, 0, 1245208, 65536, 0, 1245209, 65536, 0, 655385, 65536, 0, 655368, 65536, 0, 655369, 65536, 0, 655370, 65536, 0, 655371, 65536, 0, 655372, 65536, 0, 655373, 65536, 0, 655374, 65536, 0, 655375, 65536, 0, 655376, 65536, 0, 655377, 65536, 0, 655378, 65536, 0, 655379, 65536, 0, 655380, 65536, 0, 655381, 65536, 0, 655382, 65536, 0, 655383, 65536, 0, 655384, 65536, 0, 1048586, 65536, 0, 1048587, 65536, 0, 1048588, 65536, 0, 1048589, 65536, 0, 1048590, 65536, 0, 1048591, 65536, 0, 1048592, 65536, 0, 1048593, 65536, 0, 1048594, 65536, 0, 1048595, 65536, 0, 1048596, 65536, 0, 1048597, 65536, 0, 983061, 65536, 0, 983062, 65536, 0, 1048598, 65536, 0, 655386, 65536, 0, 1245210, 65536, 0)
+
+[node name="Mover1" type="Area2D" parent="Chunk1" unique_id=1882213926]
+position = Vector2(14, -2)
+collision_mask = 2
+script = ExtResource("3_sugp2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Chunk1/Mover1" unique_id=1975288000]
+position = Vector2(545, 477)
+shape = SubResource("RectangleShape2D_fdm2o")
+
+[node name="Chunk2" type="TileMap" parent="." unique_id=2052374847]
+unique_name_in_owner = true
+position = Vector2(608, 0)
+tile_set = SubResource("TileSet_8seq6")
+format = 2
+layer_0/tile_data = PackedInt32Array(1245192, 65536, 0, 1245193, 65536, 0, 1245194, 65536, 0, 1245195, 65536, 0, 1245196, 65536, 0, 1245197, 65536, 0, 1245198, 65536, 0, 1245199, 65536, 0, 1245200, 65536, 0, 1245201, 65536, 0, 1245202, 65536, 0, 1245203, 65536, 0, 1245204, 65536, 0, 1245205, 65536, 0, 1245206, 65536, 0, 1245208, 65536, 0, 655368, 65536, 0, 655369, 65536, 0, 655370, 65536, 0, 655371, 65536, 0, 655372, 65536, 0, 655373, 65536, 0, 655374, 65536, 0, 655375, 65536, 0, 655376, 65536, 0, 655377, 65536, 0, 655378, 65536, 0, 655379, 65536, 0, 655380, 65536, 0, 655381, 65536, 0, 655382, 65536, 0, 655383, 65536, 0, 655384, 65536, 0, 1245210, 65536, 0, 1245209, 65536, 0, 655385, 65536, 0, 655386, 65536, 0, 1245207, 65536, 0, 1048585, 65536, 0, 851977, 65536, 0, 1114121, 65536, 0, 786441, 65536, 0, 917516, 65536, 0, 983052, 65536, 0, 720908, 65536, 0, 1179660, 65536, 0, 1114127, 65536, 0, 1048591, 65536, 0, 786447, 65536, 0, 851983, 65536, 0, 720914, 65536, 0, 917522, 65536, 0, 983058, 65536, 0, 1179666, 65536, 0, 1114133, 65536, 0, 1048597, 65536, 0, 851989, 65536, 0, 786453, 65536, 0, 720920, 65536, 0, 917528, 65536, 0, 983064, 65536, 0, 1179672, 65536, 0)
+
+[node name="Mover2" type="Area2D" parent="Chunk2" unique_id=50034366]
+position = Vector2(67, 116)
+collision_mask = 2
+script = ExtResource("4_jyhfs")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Chunk2/Mover2" unique_id=1763742555]
+position = Vector2(492, 331)
+shape = SubResource("RectangleShape2D_3c2fn")
+
+[connection signal="body_entered" from="Chunk1/Mover1" to="Chunk1/Mover1" method="_on_body_entered"]
+[connection signal="body_entered" from="Chunk2/Mover2" to="Chunk2/Mover2" method="_on_body_entered"]

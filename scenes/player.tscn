@@ -1,0 +1,67 @@
+[gd_scene format=3 uid="uid://cubyxkjna11q4"]
+
+[ext_resource type="Script" uid="uid://it3urr0bbb7r" path="res://scripts/player.gd" id="1_g2els"]
+[ext_resource type="Texture2D" uid="uid://cmrwip65wafy5" path="res://assets/player_placeholder.png" id="2_qhqgy"]
+[ext_resource type="Script" uid="uid://bly0xglwwav2i" path="res://scripts/state_machine/state_machine.gd" id="3_qhqgy"]
+[ext_resource type="Texture2D" uid="uid://cmyehh8me72ib" path="res://assets/idle_placeholder.png" id="3_tuyoq"]
+[ext_resource type="Script" uid="uid://xx5dxrugj2qb" path="res://scripts/idle.gd" id="4_dqkch"]
+[ext_resource type="Script" uid="uid://btfxjkyigmdsm" path="res://scripts/falling.gd" id="5_qlg0r"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fdm2o"]
+size = Vector2(11, 31)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g2els"]
+atlas = ExtResource("2_qhqgy")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3c2fn"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g2els")
+}],
+"loop": 1,
+"name": &"fall",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_tuyoq")
+}],
+"loop": 1,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g2els")
+}],
+"loop": 1,
+"name": &"run",
+"speed": 5.0
+}]
+
+[node name="Player" type="CharacterBody2D" unique_id=1054140951]
+script = ExtResource("1_g2els")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1450060627]
+position = Vector2(-0.5, 0)
+shape = SubResource("RectangleShape2D_fdm2o")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=768647515]
+sprite_frames = SubResource("SpriteFrames_3c2fn")
+animation = &"idle"
+
+[node name="StateMachine" type="Node" parent="." unique_id=467947255 node_paths=PackedStringArray("starting_state")]
+script = ExtResource("3_qhqgy")
+starting_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="StateMachine" unique_id=50499287 node_paths=PackedStringArray("falling_state")]
+script = ExtResource("4_dqkch")
+falling_state = NodePath("../Falling")
+animation_name = "idle"
+
+[node name="Falling" type="Node" parent="StateMachine" unique_id=809951765 node_paths=PackedStringArray("idle_state")]
+script = ExtResource("5_qlg0r")
+idle_state = NodePath("../Idle")
+animation_name = "fall"
