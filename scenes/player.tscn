@@ -5,9 +5,10 @@
 [ext_resource type="Script" uid="uid://bly0xglwwav2i" path="res://scripts/state_machine/state_machine.gd" id="3_qhqgy"]
 [ext_resource type="Script" uid="uid://xx5dxrugj2qb" path="res://scripts/idle.gd" id="4_dqkch"]
 [ext_resource type="Script" uid="uid://btfxjkyigmdsm" path="res://scripts/falling.gd" id="5_qlg0r"]
+[ext_resource type="Script" uid="uid://cr77xcvh15gy6" path="res://scripts/running.gd" id="6_tuyoq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fdm2o"]
-size = Vector2(11, 31)
+size = Vector2(11, 25.5)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qlg0r"]
 atlas = ExtResource("2_qlg0r")
@@ -129,24 +130,31 @@ animations = [{
 script = ExtResource("1_g2els")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1450060627]
-position = Vector2(-0.5, 0)
+position = Vector2(2, 2.75)
 shape = SubResource("RectangleShape2D_fdm2o")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=768647515]
 sprite_frames = SubResource("SpriteFrames_3c2fn")
-animation = &"idle"
-frame_progress = 0.5936399
+animation = &"fall"
 
 [node name="StateMachine" type="Node" parent="." unique_id=467947255 node_paths=PackedStringArray("starting_state")]
 script = ExtResource("3_qhqgy")
 starting_state = NodePath("Idle")
 
-[node name="Idle" type="Node" parent="StateMachine" unique_id=50499287 node_paths=PackedStringArray("falling_state")]
+[node name="Idle" type="Node" parent="StateMachine" unique_id=50499287 node_paths=PackedStringArray("falling_state", "running_state")]
 script = ExtResource("4_dqkch")
 falling_state = NodePath("../Falling")
+running_state = NodePath("../Running")
 animation_name = "idle"
 
 [node name="Falling" type="Node" parent="StateMachine" unique_id=809951765 node_paths=PackedStringArray("idle_state")]
 script = ExtResource("5_qlg0r")
 idle_state = NodePath("../Idle")
 animation_name = "fall"
+
+[node name="Running" type="Node" parent="StateMachine" unique_id=1945805735 node_paths=PackedStringArray("idle_state", "falling_state")]
+script = ExtResource("6_tuyoq")
+idle_state = NodePath("../Idle")
+falling_state = NodePath("../Falling")
+animation_name = "run"
+metadata/_custom_type_script = "uid://cqcef8uxis6ca"

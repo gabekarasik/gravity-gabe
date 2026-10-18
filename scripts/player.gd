@@ -2,6 +2,7 @@ class_name Player
 extends CharacterBody2D
 
 @onready var animations = $AnimatedSprite2D
+@export var gravity_direction = 1
 
 var speed = 100
 
@@ -13,9 +14,6 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	if Input.is_action_pressed("move_right"):
-		velocity.x += speed * delta
-	else:
-		velocity.x = move_toward(velocity.x, 0, speed)
+	velocity.x = speed
 
 	move_and_slide()

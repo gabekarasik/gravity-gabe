@@ -4,11 +4,9 @@ extends State
 
 func enter():
 	super()
-	parent.animations.flip_v = !parent.animations.flip_v
-	gravity_direction *= -1
 
 func process_physics(delta) -> State:
-	parent.velocity.y += gravity_direction * gravity * delta
+	parent.velocity.y = parent.gravity_direction * gravity
 	
 	parent.move_and_slide()
 	

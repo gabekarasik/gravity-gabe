@@ -2,8 +2,7 @@ class_name State
 extends Node
 
 @export var animation_name : String
-@export var gravity : float = ProjectSettings.get_setting("physics/2d/default_gravity")
-@export var gravity_direction = 1
+@export var gravity : float = 100
 
 var parent : Player
 
