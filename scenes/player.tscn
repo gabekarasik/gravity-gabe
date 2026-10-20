@@ -127,15 +127,16 @@ animations = [{
 }]
 
 [node name="Player" type="CharacterBody2D" unique_id=1054140951]
+slide_on_ceiling = false
 script = ExtResource("1_g2els")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1450060627]
-position = Vector2(2, 2.75)
+position = Vector2(1, 3)
 shape = SubResource("RectangleShape2D_fdm2o")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=768647515]
 sprite_frames = SubResource("SpriteFrames_3c2fn")
-animation = &"fall"
+animation = &"run"
 
 [node name="StateMachine" type="Node" parent="." unique_id=467947255 node_paths=PackedStringArray("starting_state")]
 script = ExtResource("3_qhqgy")
@@ -147,9 +148,9 @@ falling_state = NodePath("../Falling")
 running_state = NodePath("../Running")
 animation_name = "idle"
 
-[node name="Falling" type="Node" parent="StateMachine" unique_id=809951765 node_paths=PackedStringArray("idle_state")]
+[node name="Falling" type="Node" parent="StateMachine" unique_id=809951765 node_paths=PackedStringArray("running_state")]
 script = ExtResource("5_qlg0r")
-idle_state = NodePath("../Idle")
+running_state = NodePath("../Running")
 animation_name = "fall"
 
 [node name="Running" type="Node" parent="StateMachine" unique_id=1945805735 node_paths=PackedStringArray("idle_state", "falling_state")]
